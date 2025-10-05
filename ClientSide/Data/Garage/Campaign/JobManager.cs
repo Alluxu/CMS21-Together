@@ -103,11 +103,19 @@ public static class JobManager
 		                $"\nMoneySpent:{job.MoneySpent}" +
 		                "\n----------------------------------------");
 
+		// Add money and XP here (server-side validated)
+		GlobalData.AddPlayerMoney(job.TotalPayout);
 		GlobalData.AddPlayerExp(job.XP);
 		Singleton<GameManager>.Instance.OrderGenerator.CancelJob(job.id);
 
+		// Properly handle car deletion with proper synchronization
 		CarSpawnHooks.listenToDelete = false;
 		GameData.Instance.carLoaders[job.carLoaderID].DeleteCar();
+		
+		// Handle UI updates and game state
+		GameScript.Get().SetCarLoaderOverNull();
+		GameScript.Get().GarageOnFootWithoutFader();
+		
 		if (job.IsMission)
 		{
 			GlobalData.IsStoryMissionInProgress = false;

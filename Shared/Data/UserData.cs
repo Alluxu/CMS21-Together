@@ -79,7 +79,33 @@ public class UserData
 			userObject.AddComponent<InfoBillboard>();
 			userAnimator = userObject.GetComponent<Animator>();
 			userObject.name = username;
-			Physics.IgnoreCollision(GameData.Instance.localPlayer.GetComponent<Collider>(), userObject.GetComponent<Collider>());
+			
+			// Improved collision handling to prevent flying
+			var localPlayerCollider = GameData.Instance.localPlayer.GetComponent<Collider>();
+			var remotePlayerCollider = userObject.GetComponent<Collider>();
+			
+			if (localPlayerCollider != null && remotePlayerCollider != null)
+			{
+				// Disable collision between players to prevent physics conflicts
+				Physics.IgnoreCollision(localPlayerCollider, remotePlayerCollider, true);
+				
+				// Ensure rigidbody settings are proper to prevent flying
+				var localRigidbody = GameData.Instance.localPlayer.GetComponent<Rigidbody>();
+				var remoteRigidbody = userObject.GetComponent<Rigidbody>();
+				
+				if (localRigidbody != null)
+				{
+					localRigidbody.freezeRotation = true;
+					localRigidbody.useGravity = true;
+				}
+				
+				if (remoteRigidbody != null)
+				{
+					remoteRigidbody.freezeRotation = true;
+					remoteRigidbody.useGravity = true;
+					remoteRigidbody.isKinematic = true; // Prevent physics conflicts
+				}
+			}
 		}
 
 	}

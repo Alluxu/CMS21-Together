@@ -333,6 +333,20 @@ public static class ClientHandle
 
 		MelonCoroutines.Start(JobManager.OnJobComplete(job));
 	}
+
+	public static void ExpSyncPacket(Packet packet)
+	{
+		var fromClient = packet.ReadInt();
+		var exp = packet.ReadInt();
+		var level = packet.ReadInt();
+
+		// Update the connected client's XP and level
+		if (ClientData.Instance.connectedClients.ContainsKey(fromClient))
+		{
+			ClientData.Instance.connectedClients[fromClient].playerExp = exp;
+			ClientData.Instance.connectedClients[fromClient].playerLevel = level;
+		}
+	}
 	
 	public static void EngineCraneHandlePacket(Packet packet)
 	{

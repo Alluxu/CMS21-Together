@@ -240,6 +240,9 @@
         <Reference Include="UnityEngine.UIModule">
             <HintPath>Libs\UnityEngine.UIModule.dll</HintPath>
         </Reference>
+        <Reference Include="System" />
+        <Reference Include="System.Net" />
+        <Reference Include="System.Net.Sockets" />
     </ItemGroup>
     <ItemGroup>
         <EmbeddedResource Include="Assets\cms21TogetherLogo.png"/>

@@ -93,5 +93,14 @@ public static class CarSpawnHooks
 				ClientData.Instance.loadedCars.Remove(carLoaderID);
 			}
 		}
+		
+		// Reset the listen flag after a short delay to prevent rapid toggling
+		MelonCoroutines.Start(ResetListenToDelete());
+	}
+	
+	private static IEnumerator ResetListenToDelete()
+	{
+		yield return new WaitForSeconds(0.1f);
+		listenToDelete = true;
 	}
 }

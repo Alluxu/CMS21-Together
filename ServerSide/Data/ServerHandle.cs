@@ -207,6 +207,9 @@ public static class ServerHandle
 		//MelonLogger.Msg($"Received XP Packet : {GlobalData.PlayerExp} , {GlobalData.PlayerLevel}");
 		ServerData.Instance.connectedClients[fromClient].playerExp = exp;
 		ServerData.Instance.connectedClients[fromClient].playerLevel = lvl;
+		
+		// Sync XP changes to all clients to prevent desync
+		ServerSend.ExpPacket(fromClient, exp, lvl);
 	}
 	
 	public static void PointPacket(int fromClient, Packet packet)

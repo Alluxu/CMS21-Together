@@ -1,32 +1,44 @@
 {
   "format": 1,
   "restore": {
-    "H:\\Rider Project\\CMS21-Together\\CMS21-Together.csproj": {}
+    "F:\\Desktop\\CMS21-Together-MainMod\\CMS21-Together.csproj": {}
   },
   "projects": {
-    "H:\\Rider Project\\CMS21-Together\\CMS21-Together.csproj": {
+    "F:\\Desktop\\CMS21-Together-MainMod\\CMS21-Together.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "H:\\Rider Project\\CMS21-Together\\CMS21-Together.csproj",
+        "projectUniqueName": "F:\\Desktop\\CMS21-Together-MainMod\\CMS21-Together.csproj",
         "projectName": "CMS21-Together",
-        "projectPath": "H:\\Rider Project\\CMS21-Together\\CMS21-Together.csproj",
-        "packagesPath": "C:\\Users\\brand\\.nuget\\packages\\",
-        "outputPath": "H:\\Rider Project\\CMS21-Together\\obj\\",
+        "projectPath": "F:\\Desktop\\CMS21-Together-MainMod\\CMS21-Together.csproj",
+        "packagesPath": "C:\\Users\\Alvar\\.nuget\\packages\\",
+        "outputPath": "F:\\Desktop\\CMS21-Together-MainMod\\obj\\",
         "projectStyle": "PackageReference",
         "skipContentFileWrite": true,
+        "fallbackFolders": [
+          "F:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\brand\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\Alvar\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net472"
         ],
         "sources": {
-          "https://api.nuget.org/v3/index.json": {}
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://pkgs.dev.azure.com/alvargranORG/_packaging/eShopOnWebShared/nuget/v3/index.json": {}
         },
         "frameworks": {
           "net472": {
             "projectReferences": {}
           }
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -77,20 +89,6 @@
               "version": "[4.5.0, )"
             }
           }
-        }
-      },
-      "runtimes": {
-        "win": {
-          "#import": []
-        },
-        "win-arm64": {
-          "#import": []
-        },
-        "win-x64": {
-          "#import": []
-        },
-        "win-x86": {
-          "#import": []
         }
       }
     }

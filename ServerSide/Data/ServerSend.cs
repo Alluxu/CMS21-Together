@@ -223,6 +223,18 @@ public static class ServerSend
 		}
 	}
 
+	public static void ExpPacket(int fromClient, int exp, int level)
+	{
+		using (var packet = new Packet((int)PacketTypes.exp))
+		{
+			packet.Write(fromClient);
+			packet.Write(exp);
+			packet.Write(level);
+
+			SendDataToAll(fromClient, packet);
+		}
+	}
+
 	public static void SceneChangePacket(int fromClient, GameScene scene)
 	{
 		using (var packet = new Packet((int)PacketTypes.sceneChange))

@@ -200,9 +200,8 @@ public static class JobHooks
 			                $"\nMoneySpent:{job.MoneySpent}" +
 			                "\n----------------------------------------");
 
+		// Don't add money/XP here - let the server handle it to prevent double rewards
 		Singleton<GameManager>.Instance.Inventory.TryAddSpecialCase(job.IsMission);
-		GlobalData.AddPlayerMoney(job.TotalPayout);
-		GlobalData.AddPlayerExp(job.XP);
 		
 		var modJob = new ModJob(job);
 		if (JobManager.selectedJobs.Any(j => j.id == job.id)) JobManager.selectedJobs.Remove(modJob);
@@ -221,9 +220,10 @@ public static class JobHooks
 			
 		}
 		
-		carLoader.DeleteCar(true);
-		GameScript.Get().SetCarLoaderOverNull();
-		GameScript.Get().GarageOnFootWithoutFader();
+		// Don't delete car here - let the server handle it to prevent desync
+		// carLoader.DeleteCar(true);
+		// GameScript.Get().SetCarLoaderOverNull();
+		// GameScript.Get().GarageOnFootWithoutFader();
 		
 		GarageLoader.Get().Save();
 		if (job.IsCompleted) Singleton<GameManager>.Instance.PlatformManager.IncrementStat("stat_finish_order", 1);

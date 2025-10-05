@@ -19,18 +19,33 @@ public static class Movement
 		if (player.scene != ClientData.UserData.scene) return;
 		if (player.userObject == null) player.SpawnPlayer();
 		
-		if (player.lastPosition != null)
-		{
-			var direction = (position.toVector3() - player.lastPosition.toVector3()).normalized;
-			var speed = (position.toVector3() - player.lastPosition.toVector3()).magnitude / Time.deltaTime;
-			
-			UpdateAnimations(player.userAnimator, direction, speed);
-			player.lastUpdateTime = Time.time;
-		}
-		
+		// Improved position update with better interpolation
 		if (player.userObject != null)
 		{
-			player.userObject.transform.position = position.toVector3();
+			var targetPosition = position.toVector3();
+			var currentPosition = player.userObject.transform.position;
+			
+			// Smooth interpolation to prevent freezing/jittering
+			if (player.lastPosition != null)
+			{
+				var direction = (targetPosition - player.lastPosition.toVector3()).normalized;
+				var speed = (targetPosition - player.lastPosition.toVector3()).magnitude / Time.deltaTime;
+				
+				// Clamp speed to prevent unrealistic movement
+				speed = Mathf.Clamp(speed, 0f, 20f);
+				
+				UpdateAnimations(player.userAnimator, direction, speed);
+				player.lastUpdateTime = Time.time;
+				
+				// Smooth position interpolation
+				player.userObject.transform.position = Vector3.Lerp(currentPosition, targetPosition, Time.deltaTime * 15f);
+			}
+			else
+			{
+				// Direct position update for first frame
+				player.userObject.transform.position = targetPosition;
+			}
+			
 			player.lastPosition = position;
 		}
 	}
